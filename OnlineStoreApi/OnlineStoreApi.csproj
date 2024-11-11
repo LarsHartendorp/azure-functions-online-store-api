@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="1.3.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
+    <PackageReference Include="MongoDB.Bson" Version="3.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.30.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="HandleOrdersTimeTriggerFunction\host.json" />
+    <_ContentIncludedByDefault Remove="HandleOrdersTimeTriggerFunction\local.settings.json" />
+    <_ContentIncludedByDefault Remove="HandleOrdersTimeTriggerFunction\obj\HandleOrdersTimeTriggerFunction.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="HandleOrdersTimeTriggerFunction\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="HandleOrdersTimeTriggerFunction\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="HandleOrdersTimeTriggerFunction\Properties\launchSettings.json" />
+  </ItemGroup>
+
+</Project>
