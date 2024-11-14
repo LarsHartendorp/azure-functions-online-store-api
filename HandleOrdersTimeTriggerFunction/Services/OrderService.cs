@@ -18,7 +18,6 @@ public class OrderService
 
     public async Task<List<Order>> GetOrdersAsync()
     {
-        // Fetch orders
         var response = await _httpClient.GetAsync("http://localhost:5252/api/Orders");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -27,12 +26,10 @@ public class OrderService
         return JsonSerializer.Deserialize<List<Order>>(content);
     }
     
-    // Pushes orders without a shipping date to the queue
     public async Task HandleTimeTrigger()
     {
         var orders = await GetOrdersAsync();
-
-        // Ensure queue exists
+        
         await _queueClient.CreateIfNotExistsAsync();
 
         foreach (var order in orders)

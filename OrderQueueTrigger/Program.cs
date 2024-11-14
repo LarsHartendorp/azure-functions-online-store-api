@@ -11,13 +11,11 @@ var host = new HostBuilder()
         var connectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
         var orderQueueName = Environment.GetEnvironmentVariable("OrdersQueue");
         
-        // Register QueueClient for stationqueue
         services.AddSingleton(new QueueClient(connectionString, orderQueueName));
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-
-        // Register UpdateShippingService
+        
         services.AddSingleton<UpdateShippingService>();
         services.AddHttpClient();
     })

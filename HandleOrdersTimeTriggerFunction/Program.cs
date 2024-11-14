@@ -11,11 +11,9 @@ var host = new HostBuilder()
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         
-        // register queue client
         var connectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
         var queueName = Environment.GetEnvironmentVariable("OrdersQueue");
-
-        // Configure HttpClient with the base address for OnlineStoreApi
+        
         services.AddHttpClient<OrderService>(client =>
         {
             client.BaseAddress = new Uri("http://localhost:5252/");

@@ -22,26 +22,21 @@ namespace OrderQueueTrigger.Services
 
             if (order?.shippingDate == null)
             {
-                // Set the shipping date to the current date
                 var newShippingDate = DateTime.UtcNow;
                 order.shippingDate = newShippingDate;
-
-                // Construct the request payload
+                
                 var requestPayload = new
                 {
                     shippingDate = newShippingDate
                 };
-
-                // Serialize the payload
+                
                 var content = new StringContent(JsonSerializer.Serialize(requestPayload), Encoding.UTF8, "application/json");
-
-                // Make the PUT request to the OrdersController
+                
                 var url = $"http://localhost:5252/api/Orders/{order.orderId}";
                 var response = await _httpClient.PutAsync(url, content);
                 _logger.LogInformation($"Response status: {response.StatusCode}");
                 var responseBody = await response.Content.ReadAsStringAsync();
                 _logger.LogInformation($"Response body: {responseBody}");
-
 
                 if (response.IsSuccessStatusCode)
                 {

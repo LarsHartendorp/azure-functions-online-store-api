@@ -10,13 +10,11 @@ public class OrderQueueTrigger
 {
     private readonly ILogger<OrderQueueTrigger> _logger;
     private readonly UpdateShippingService _updateShippingService;
-    private readonly HttpClient _httpClient;
 
-    public OrderQueueTrigger(ILogger<OrderQueueTrigger> logger, UpdateShippingService updateShippingService, HttpClient httpClient)
+    public OrderQueueTrigger(ILogger<OrderQueueTrigger> logger, UpdateShippingService updateShippingService)
     {
         _logger = logger;
         _updateShippingService = updateShippingService;
-        _httpClient = httpClient;
     }
 
     [Function(nameof(OrderQueueTrigger))]
@@ -41,7 +39,6 @@ public class OrderQueueTrigger
             return;
         }
 
-        // Update the shipping date using the service
         await _updateShippingService.UpdateShippingDate(order);
     }
 }

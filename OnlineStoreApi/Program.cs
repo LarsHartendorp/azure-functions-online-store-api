@@ -7,7 +7,6 @@ using OnlineStoreAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register repositories and services
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -25,10 +24,7 @@ builder.Services.AddSingleton<IMongoClient, MongoClient>(sp =>
     return new MongoClient(settings.ConnectionString);
 });
 
-// Add controllers
 builder.Services.AddControllers();
-
-// Add Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Online Store API", Version = "v1" });
@@ -36,23 +32,20 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure middleware
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage(); // For detailed error pages in development
+    app.UseDeveloperExceptionPage(); 
 }
 else
 {
-    app.UseMiddleware<GlobalExceptionHandlerMiddleware>(); // Register global exception handler middleware
+    app.UseMiddleware<GlobalExceptionHandlerMiddleware>(); 
 }
 
-// Serve static files
 app.UseStaticFiles();
 
 // Redirect root to index.html
 app.MapGet("/", () => Results.Redirect("/swagger/index.html"));
 
-// Use Swagger
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
