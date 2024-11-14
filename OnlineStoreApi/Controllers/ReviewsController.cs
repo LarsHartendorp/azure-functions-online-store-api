@@ -39,9 +39,6 @@ namespace OnlineStoreAPI.Controllers
         public async Task<ActionResult<CreateReviewResponse>> PostReview(CreateReviewRequest request)
         {
             var response = await _reviewService.AddReviewAsync(request);
-
-            // wat stuur je hier terug?
-            //return CreatedAtAction(nameof(GetReview), new { id = response.ReviewId }, response);
             return Ok(response);
         }
 

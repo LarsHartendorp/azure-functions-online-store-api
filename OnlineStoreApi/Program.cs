@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using OnlineStoreAPI.Configurations;
 using OnlineStoreAPI.Repositories;
 using OnlineStoreAPI.Services;
+using OnlineStoreAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,19 +41,23 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage(); // For detailed error pages in development
 }
+else
+{
+    app.UseMiddleware<GlobalExceptionHandlerMiddleware>(); // Register global exception handler middleware
+}
 
 // Serve static files
 app.UseStaticFiles();
 
 // Redirect root to index.html
-app.MapGet("/", () => Results.Redirect("/swagger/index.html")); // Redirect root to index.html
+app.MapGet("/", () => Results.Redirect("/swagger/index.html"));
 
 // Use Swagger
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Store API V1");
-    c.RoutePrefix = "swagger"; // Set the Swagger UI to be at /swagger
+    c.RoutePrefix = "swagger";
 });
 
 app.UseRouting();

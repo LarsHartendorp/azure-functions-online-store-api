@@ -45,18 +45,15 @@ namespace OnlineStoreAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<PutOrderByIdResponse>> PutOrder(string id, PutOrderByIdRequest request)
         {
-            // Check if the order exists
             var exists = await _orderService.OrderExistsAsync(id);
             if (!exists)
             {
                 return NotFound(new { message = $"Order with ID {id} not found" });
             }
-
-            // Update the shipping date (or set to null if null)
+            
             var shippingDate = request.ShippingDate ?? DateTime.Now;
             await _orderService.UpdateOrderAsync(id, shippingDate);
-
-            // Retrieve the updated order response
+            
             var updatedResponse = await _orderService.GetOrderResponseByIdAsync(id);
 
             return Ok(updatedResponse);

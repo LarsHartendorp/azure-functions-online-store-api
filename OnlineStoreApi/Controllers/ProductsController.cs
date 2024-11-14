@@ -2,6 +2,8 @@
 using OnlineStoreApi.Models.DTO.Requests.Product;
 using OnlineStoreApi.Models.DTO.Responses.Product;
 using OnlineStoreAPI.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineStoreApi.Controllers
 {
@@ -19,63 +21,52 @@ namespace OnlineStoreApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetProductByIdResponse>>> GetProducts()
         {
-            try
-            {
-                var responses = await _productService.GetAllProductsResponseAsync();
-                return Ok(responses);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, new { message = "An unexpected error occurred." });
-            }
+            var responses = await _productService.GetAllProductsResponseAsync();
+            return Ok(responses);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<GetProductByIdResponse>> GetProduct(string id)
         {
-            try
+            var response = await _productService.GetProductByIdResponseAsync(id);
+            if (response == null)
             {
-                var response = await _productService.GetProductByIdResponseAsync(id);
-                return Ok(response);
+                return NotFound(new { message = $"Product with ID {id} not found" });
             }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<CreateProductResponse> PostProduct(CreateProductRequest request)
+        public async Task<ActionResult<CreateProductResponse>> PostProduct(CreateProductRequest request)
         {
-             return await _productService.AddProductAsync(request);
+            var response = await _productService.AddProductAsync(request);
+            return CreatedAtAction(nameof(GetProduct), new { id = response.ProductId }, response);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<PutProductByIdResponse>> PutProduct(string id, PutProductByIdRequest request)
         {
-            try
+            var exists = await _productService.ProductExistsAsync(id);
+            if (!exists)
             {
-                var response = await _productService.UpdateProductByIdAsync(id, request);
-                return Ok(response);
+                return NotFound(new { message = $"Product with ID {id} not found" });
             }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
+
+            var response = await _productService.UpdateProductByIdAsync(id, request);
+            return Ok(response);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
-            try
+            var exists = await _productService.ProductExistsAsync(id);
+            if (!exists)
             {
-                await _productService.DeleteProductAsync(id);
-                return NoContent();
+                return NotFound(new { message = $"Product with ID {id} not found" });
             }
-            catch (Exception)
-            {
-                return StatusCode(500, new { message = "An error occurred while deleting the product"});
-            }
+
+            await _productService.DeleteProductAsync(id);
+            return NoContent();
         }
     }
 }

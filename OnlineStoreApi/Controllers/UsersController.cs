@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStoreApi.Models.DTO.Requests.User;
-using OnlineStoreApi.Models.DTO.Responses.Order;
 using OnlineStoreApi.Models.DTO.Responses.User;
-using OnlineStoreAPI.Models;
 using OnlineStoreAPI.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -50,17 +47,13 @@ namespace OnlineStoreAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<PutUserByIdResponse>> PutUser(string id, PutUserByIdRequest request)
         {
-            // Check if the user exists
             var exists = await _userService.UserExistsAsync(id);
             if (!exists)
             {
                 return NotFound(new { message = $"User with ID {id} not found" });
             }
 
-            // Update the user's email
             await _userService.UpdateUserAsync(id, request.Email);
-
-            // Retrieve the updated user response
             var updatedResponse = await _userService.GetUserResponseByIdAsync(id);
             return Ok(updatedResponse);
         }
@@ -68,7 +61,6 @@ namespace OnlineStoreAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(string id)
         {
-            // Check if the user exists
             var exists = await _userService.UserExistsAsync(id);
             if (!exists)
             {
