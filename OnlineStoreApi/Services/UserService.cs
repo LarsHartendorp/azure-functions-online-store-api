@@ -38,14 +38,12 @@ namespace OnlineStoreAPI.Services
             {
                 return null;
             }
-
-            // Retrieve user's orders (this assumes a method GetOrdersByUserIdAsync in your repository)
+            
             var userOrders = await _orderRepository.GetOrdersByUserIdAsync(id);
 
             var orders = new List<GetUserByIdOrderResponse>();
             foreach (var order in userOrders)
             {
-                // Retrieve products for each order (this assumes a method GetProductsByOrderIdAsync in your repository)
                 var orderProducts = order.Products;
 
                 var products = orderProducts.Select(product => new GetProductsByIdResponse
@@ -105,6 +103,5 @@ namespace OnlineStoreAPI.Services
         {
             return await _userRepository.UserExistsAsync(id);
         }
-
     }
 }

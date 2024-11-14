@@ -9,7 +9,6 @@ namespace OnlineStoreAPI.Services
         Task<IEnumerable<GetOrderByIdResponse>> GetOrdersWithResponsesAsync();
         Task<GetOrderByIdResponse?> GetOrderResponseByIdAsync(string id);
         Task<CreateOrderResponse> AddOrderAsync(CreateOrderRequest request);
-        Task<CreateShippingDateResponse> ShipOrderAsync(string id);
         Task UpdateOrderAsync(string orderId, DateTime shippingDate);
         Task DeleteOrderAsync(string id);
         Task<bool> OrderExistsAsync(string id);

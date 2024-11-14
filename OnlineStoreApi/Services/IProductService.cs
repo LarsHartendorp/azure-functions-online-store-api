@@ -14,6 +14,5 @@ namespace OnlineStoreAPI.Services
         Task<IEnumerable<GetProductByIdResponse>> GetAllProductsResponseAsync(); 
         Task DeleteProductAsync(string id);
         Task<bool> ProductExistsAsync(string id);
-        Task DeleteProductWithValidationAsync(string id); 
     }
 }

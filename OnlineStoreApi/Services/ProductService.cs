@@ -109,27 +109,10 @@ namespace OnlineStoreAPI.Services
 
             return response;
         }
-
-
+        
         public async Task DeleteProductAsync(string id)
         {
             await _productRepository.DeleteAsync(id);
-        }
-
-        public async Task DeleteProductWithValidationAsync(string id)
-        {
-            try
-            {
-                if (!await ProductExistsAsync(id))
-                {
-                    throw new KeyNotFoundException($"Product with ID {id} not found.");
-                }
-                await DeleteProductAsync(id);
-            }
-            catch (Exception)
-            {
-                throw; 
-            }
         }
 
         public async Task<bool> ProductExistsAsync(string id)
