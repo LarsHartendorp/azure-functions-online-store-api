@@ -2,8 +2,6 @@
 using MongoDB.Driver;
 using OnlineStoreAPI.Configurations;
 using OnlineStoreAPI.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OnlineStoreAPI.Repositories
 {

@@ -42,8 +42,7 @@ namespace OnlineStoreAPI.Repositories
         {
             await _reviews.DeleteOneAsync(review => review.ReviewId.ToString() == id);
         }
-
-
+        
         public async Task<bool> ReviewExistsAsync(string id)
         {
             var count = await _reviews.CountDocumentsAsync(review => review.ReviewId.ToString() == id);

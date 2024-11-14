@@ -33,11 +33,7 @@ namespace OnlineStoreAPI.Repositories
 
         public async Task UpdateAsync(Product product)
         {
-            var result = await _products.ReplaceOneAsync(p => p.ProductId == product.ProductId, product);
-            if (result.ModifiedCount == 0)
-            {
-                // Optionally handle the case where the product wasn't updated
-            }
+            await _products.ReplaceOneAsync(p => p.ProductId == product.ProductId, product);
         }
 
         public async Task DeleteAsync(string id)
@@ -49,10 +45,6 @@ namespace OnlineStoreAPI.Repositories
         {
             var count = await _products.CountDocumentsAsync(product => product.ProductId.ToString() == id);
             return count > 0;
-
-            // Alternatively, using Find
-            // var product = await _products.Find(product => product.ProductId == id).FirstOrDefaultAsync();
-            // return product != null;
         }
     }
 }
