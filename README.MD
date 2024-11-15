@@ -1,7 +1,13 @@
 ﻿### Usage
-1. Navigate to the folder of OnlineStoreApi
+1. Navigate in the terminal to the folder of OnlineStoreApi
 2. In the terminal enter the command `docker compose up`
 3. please start the program and navigate to **http://localhost:5252/swagger/index.html** to see all the features for this application 
+4. In swagger please make a new user by doing a POST on /api/Users (and please copy this id)
+5. In swagger also create a new product by doing a POST on /api/Products (and please copy this id)
+6. You are now able to create a new order by doing a POST on /api/Orders. Paste the id's of the user and the product(s). Hit enter and the result will be a new order (without a shipping date)
+7. in the terminal you will now see that both HandleOrdersTimeTriggerFunction and OrderQueueTrigger both have done their jobs. 
+
+
 
 # Solution Overview
 This solution consists of 3 main projects:
