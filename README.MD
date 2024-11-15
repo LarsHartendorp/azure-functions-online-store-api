@@ -1,4 +1,8 @@
-﻿# Solution Overview
+﻿### Usage
+
+please start the program and navigate to **http://localhost:5252/swagger/index.html** to see all the features for this application 
+
+# Solution Overview
 
 This solution consists of 3 main projects:
 
@@ -21,7 +25,7 @@ Within the OnlineStoreApi, the flow follows a structured path:
 - **Controller** ➔ **Interface Service** ➔ **Service** ➔ **Interface Repository** ➔ **Repository**
 
 Two Azure Functions are used:
-1. **HandleOrdersTimeTrigger** (Timer Trigger)
+1. **HandleOrdersTimeTriggerFunction** (Timer Trigger)
 2. **OrderQueueTrigger** (Queue Trigger)
 
 ### Loosely Coupled Services

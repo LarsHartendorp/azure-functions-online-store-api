@@ -16,16 +16,17 @@ public class TimerTrigger
     }
 
     [Function("TimerTrigger")]
-    // public async Task Run([TimerTrigger("0 0 0 * * *")] TimerInfo myTimer)
-    // {
-    //     _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
-    //     await _orderService.HandleTimeTrigger();
-    // }
-    //
-    public async Task Run([TimerTrigger("0 * * * * *")] TimerInfo myTimer)
+    public async Task Run([TimerTrigger("0 0 0 * * *")] TimerInfo myTimer)
     {
         _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
         await _orderService.HandleTimeTrigger();
     }
-
+    
+    // Timer trigger for testing every minute
+    // [Function("TimerTrigger")]
+    // public async Task Run([TimerTrigger("0 * * * * *")] TimerInfo myTimer)
+    // {
+    //     _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+    //     await _orderService.HandleTimeTrigger();
+    // }
 }
