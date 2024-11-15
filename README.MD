@@ -1,9 +1,9 @@
 ﻿### Usage
-
-please start the program and navigate to **http://localhost:5252/swagger/index.html** to see all the features for this application 
+1. Navigate to the folder of OnlineStoreApi
+2. In the terminal enter the command `docker compose up`
+3. please start the program and navigate to **http://localhost:5252/swagger/index.html** to see all the features for this application 
 
 # Solution Overview
-
 This solution consists of 3 main projects:
 
 ### OnlineStoreApi
